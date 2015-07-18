@@ -1,0 +1,90 @@
+<div ng-controller="SearchCtrl as ctrl">
+  <md-content class="md-padding">
+    <md-card>
+      <md-card-content layout="column">
+      <md-autocomplete
+          ng-disabled="ctrl.isDisabled"
+          md-no-cache="ctrl.noCache"
+          md-selected-item="ctrl.selectedItem"
+          md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"
+          md-search-text="ctrl.searchText"
+          md-selected-item-change="ctrl.selectedItemChange(item)"
+          md-items="item in ctrl.querySearch(ctrl.searchText)"
+          md-item-text="item.name"
+          md-min-length="0"
+          placeholder="Where do you plan to go?"
+          md-menu-class="autocomplete-custom-template">
+        <md-item-template>
+          <span class="item-title">
+            <span> {{item.name}} </span>
+          </span>
+          <span class="item-metadata" style="float: right">
+            <span class="item-metastat">
+              <strong>{{item.distance | number : 0}}</strong> meters
+            </span>
+          </span>
+        </md-item-template>
+      </md-autocomplete>
+      </md-card-content>
+      <div class="md-actions" layout="row" layout-align="end center">
+        <md-button class="md-raised md-primary" ng-click="recommendJourney()">Recommend Journey</md-button>
+      </div>
+    </md-card>
+    <h3 class="md-headline" layout="row" layout-align="center center">Your Journey</h3>
+    <div offset="80" ng-if="ctrl.list.items.length > 0">
+    	<p class="md-body-1">Estimate Cost:</p>
+    	<md-button class="md-raised" ng-click="recommendJourney()">{{sum|currency:"$"}}</md-button>
+    	<md-button class="md-raised md-primary" ng-click="saveData()">save</md-button>
+    </div>
+    <div ng-repeat="(index, item) in ctrl.list.items">
+	    <md-fab-speed-dial md-open="ctrl.list.transports[index-1].isOpen" md-direction="right" class="md-fling" offset="50" ng-if="index > 0">
+	        <md-fab-trigger>
+	          <md-button aria-label="menu" class="md-fab md-warn">
+	            <i class="fa {{ctrl.list.transports[index-1].choice}} fa-x"></i>
+	          </md-button>
+	          <span ng-if="ctrl.list.transports[index-1].price">{{ctrl.list.transports[index-1].price | currency:"$"}}</span>
+	        </md-fab-trigger>
+	        <md-fab-actions>
+	          <md-button class="md-fab md-raised md-mini" ng-click="selectTransport(ctrl.list.transports[index-1], 'fa-car')">
+	            <i class="fa fa-car fa-x"></i>
+	          </md-button>
+	          <md-button class="md-fab md-raised md-mini" ng-click="selectTransport(ctrl.list.transports[index-1], 'fa-bus')">
+	            <i class="fa fa-bus fa-x"></i>
+	          </md-button>
+	          <md-button class="md-fab md-raised md-mini" ng-click="selectTransport(ctrl.list.transports[index-1], 'fa-male')">
+	            <i class="fa fa-male fa-x"></i>
+	          </md-button>
+	          <md-button class="md-fab md-raised md-mini" ng-click="selectTransport(ctrl.list.transports[index-1], 'fa-underline', index)">
+	            <i class="fa fa-underline fa-x"></i>
+	          </md-button>
+	        </md-fab-actions>
+	      </md-fab-speed-dial>
+	      <!-- Card -->
+	   	<md-card>
+	      <md-card-content layout="row" layout-wrap>
+	      	<div flex="85">
+			  <md-list-item class="md-2-line">
+		        <img ng-src="{{item.image_url}}" class="md-avatar"/>
+		        <div class="md-list-item-text">
+		          <div layout="row">
+		          	  <div>
+			          	<h3>{{ item.name }}</h3>
+			          	<p>{{ item.location.address[0] }}</p>		          	  
+		          	   </div>
+			          <md-button class="md-accent" ng-href="{{item.url}}" target="_blank"><i class="fa fa-yelp fa-x"></i>Yelp</md-button>
+			          <md-button class="md-fab md-mini" >{{item.rating}}</md-button>  	
+		          </div>
+		        </div>
+		      </md-list-item>
+	     	</div>
+	      	<div flex="15" layout="row" layout-align="center center">
+	      			<md-button class="md-raised md-primary">{{item.price|currency:"$"}}</md-button>
+	      			<md-button class="md-fab md-mini" ng-click="removeItem(index)">
+	            		<i class="fa fa-close fa-x"></i>
+	        	    </md-button>     		
+	     	</div>
+	      </md-card-content>
+	    </md-card>
+    </div>
+  </md-content>
+</div>

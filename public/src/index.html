@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en" ng-app="RDash">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Night Owl</title>
+    <!-- STYLES -->
+    <!-- build:css lib/css/main.min.css -->
+    <link rel="stylesheet" type="text/css" href="components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="components/angular-material/angular-material.css">
+    <link rel="stylesheet" type="text/css" href="css/custom.css">
+
+    <!-- endbuild -->
+    <!-- SCRIPTS -->
+    <!-- build:js lib/js/main.min.js -->
+    <script type="text/javascript" src="components/angular/angular.min.js"></script>
+    <script type="text/javascript" src="components/angular-cookies/angular-cookies.min.js"></script>
+    <script type="text/javascript" src="components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script type="text/javascript" src="components/angular-animate/angular-animate.js"></script>
+    <script type="text/javascript" src="components/angular-aria/angular-aria.js"></script>
+    <script type="text/javascript" src="components/angular-material/angular-material.js"></script>
+    <script type="text/javascript" src="components/base64/base64.js"></script>
+    <script type="text/javascript" src="components/firebase/firebase.js"></script>
+    <script type="text/javascript" src="components/angularfire/dist/angularfire.js"></script>
+<link href='http://fonts.googleapis.com/css?family=Imprima' rel='stylesheet' type='text/css'>
+    <!-- endbuild -->
+    <!-- Custom Scripts -->
+    <script type="text/javascript" src="js/dashboard.min.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+  </head>
+  <body ng-controller="MasterCtrl" id="body">
+    <md-toolbar layout="row">
+    <div class="md-toolbar-tools" id="title">
+      <md-button ng-click="toggleSidenav('left')" hide-gt-sm class="md-icon-button">
+      </md-button>
+   <h1 id="heading">Night</h1> <img src="img/owllogofinal.png" id="owllogo"/><h1 id="heading2">wl</h1>
+    </div>
+    <div layout="row" layout-align="center end">
+      <md-button href="#/save"><i class="fa fa-location-arrow fa-2x"></i></md-button>
+      <!-- <md-button><i class="fa fa-users fa-2x"></i></md-button> -->
+      <md-button href="#/"><i class="fa fa-user fa-2x"></i></md-button>
+    </div>
+    </md-toolbar>
+    <div layout="row" flex>
+      <div layout="column" flex id="content">
+        <md-content layout="column" flex class="md-padding">
+        <div ui-view></div>
+        </md-content>
+      </div>
+    </div>
+    
+    </div><!-- End Page Content -->
+    </div><!-- End Content Wrapper -->
+    </div><!-- End Page Wrapper -->
+  </body>
+</html>

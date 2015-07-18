@@ -1,0 +1,30 @@
+<style type="text/css">
+	.img-icon {
+  width: 40px;
+  height: 40px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  margin-right: 16px;
+  border-radius: 50%;
+  box-sizing: content-box;
+ }
+</style>
+
+<div ng-controller="SaveCtrl as ctrl">
+	<md-card ng-repeat="(key,journey) in ctrl.data">
+      <md-card-content layout="row" layout-wrap>
+      	<div flex="85" layout="row">
+      		<span ng-repeat="(index, item) in journey.items" layout="row">
+      		<md-button ng-if="index>0" class="md-fab md-raised md-mini">
+	            <i class="fa {{journey.transports[index-1].choice}} fa-x"></i>
+	          </md-button>
+      			<img ng-src="{{item.image_url}}" class="img-icon"/>
+      		</span>
+     	</div>
+      	<div flex="15" layout="row" layout-align="center center">
+      			<md-button class="md-raised md-primary" ng-click="ctrl.view(key)"><i class="fa fa-search-plus"></i>Detail</md-button>
+     	</div>
+      </md-card-content>
+    </md-card>
+
+</div>
